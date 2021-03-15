@@ -4,7 +4,7 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 $faker = Faker\Factory::create('fr_FR');
 
 
-$pdo = new PDO('mysql:dbname=tutoblog;host=127.0.0.1', 'root', 'root', [
+$pdo = new PDO('mysql:dbname=tutoblog;host=127.0.0.1', 'tofill', 'tofill', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
 
