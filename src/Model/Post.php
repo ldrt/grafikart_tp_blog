@@ -27,6 +27,12 @@ class Post {
         return $this->name;
     }
 
+    public function getFormattedContent() : ?string
+    {
+        return nl2br(htmlentities($this->content));
+    }
+
+
     public function getExcerpt() : ?string
     {
         if($this->content === null) {
