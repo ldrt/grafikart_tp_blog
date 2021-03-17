@@ -1,7 +1,10 @@
 <?php
 
+use App\Auth;
 use App\Connection;
 use App\Table\PostTable;
+
+Auth::check();
 
 $title = "Administration";
 $pdo = Connection::getPDO();
@@ -34,9 +37,9 @@ $link = $router->url('admin_posts');
                 <a href="<?= $router->url('admin_post', ['id' => $post->getID()]) ?>" class="btn btn-primary">
                     Editer
                 </a>
-                <a href="<?= $router->url('admin_post_delete', ['id' => $post->getID()]) ?>" class="btn btn-danger"
-                onclick="return confirm('Voulez vous supprimer ce post ?')">
-                    Supprimer
+                <form method="POST" action="<?= $router->url('admin_post_delete', ['id' => $post->getID()]) ?>"
+                onsubmit="return confirm('Voulez vous supprimer ce post ?')" style="display:inline">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
                 </a>
             </td>
         </tr>
