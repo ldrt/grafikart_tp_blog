@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'eaa0712d223cd40a4755c662e153447769265b65',
+    'reference' => '7942c9d3209b6a2df33e617786c818467fc76916',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'eaa0712d223cd40a4755c662e153447769265b65',
+      'reference' => '7942c9d3209b6a2df33e617786c818467fc76916',
     ),
     'altorouter/altorouter' => 
     array (
@@ -82,6 +82,15 @@
       array (
       ),
       'reference' => '002ab5a36702adf0c9a11e6d8836623253e9045e',
+    ),
+    'vlucas/valitron' => 
+    array (
+      'pretty_version' => 'v1.4.9',
+      'version' => '1.4.9.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '81515dcc951e1f636a1a18ece2f4154dfa123438',
     ),
   ),
 );
