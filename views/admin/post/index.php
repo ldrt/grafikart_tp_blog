@@ -22,7 +22,9 @@ $link = $router->url('admin_posts');
     <thead>
         <th>ID</th>
         <th>Titre</th>
-        <th>Actions</th>
+        <th>
+            <a href="<?= $router->url('admin_post_new') ?>" class="btn btn-primary">Créer un article</a>
+        </th>
     </thead>
     <tbody>
     <?php foreach($posts as $post) :  ?>

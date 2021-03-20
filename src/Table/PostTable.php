@@ -10,6 +10,22 @@ class PostTable extends Table {
     protected $table = "post";
     protected $class = Post::class;
 
+    
+    public function create (Post $post) : void
+    {
+        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET name = :name, slug = :slug, created_at = :created, content = :content");
+        $result = $query->execute([
+            'name' => $post->getName(),
+            'slug' => $post->getSlug(),
+            'content' => $post->getContent(),
+            'created' => $post->getCreatedAt()->format('Y-m-d H:i:s')
+        ]);
+        if($result === false) {
+            throw new Exception("Impossible de créer l'enregistrement dans la table {$this->table}");
+        }
+        $post->setID($this->pdo->lastInsertId());
+    }
+
     public function update (Post $post) : void
     {
         $query = $this->pdo->prepare("UPDATE {$this->table} SET name = :name, slug = :slug, created_at = :created, content = :content WHERE id = :id");

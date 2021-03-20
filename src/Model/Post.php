@@ -17,6 +17,13 @@ class Post {
         return $this->id;
     }
 
+    public function setID(int $id) : self
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+
     public function getSlug() : ?string
     {
         return $this->slug;
