@@ -11,43 +11,26 @@ class PostTable extends Table {
     protected $class = Post::class;
 
     
-    public function create (Post $post) : void
+    public function createPost (Post $post) : void
     {
-        $query = $this->pdo->prepare("INSERT INTO {$this->table} SET name = :name, slug = :slug, created_at = :created, content = :content");
-        $result = $query->execute([
+        $id = $this->create([
             'name' => $post->getName(),
             'slug' => $post->getSlug(),
             'content' => $post->getContent(),
-            'created' => $post->getCreatedAt()->format('Y-m-d H:i:s')
+            'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s')
         ]);
-        if($result === false) {
-            throw new Exception("Impossible de créer l'enregistrement dans la table {$this->table}");
-        }
-        $post->setID($this->pdo->lastInsertId());
+        $post->setID($id);
     }
 
-    public function update (Post $post) : void
+    public function updatePost(Post $post) : void
     {
-        $query = $this->pdo->prepare("UPDATE {$this->table} SET name = :name, slug = :slug, created_at = :created, content = :content WHERE id = :id");
-        $result = $query->execute([
+        $this->update([
             'id' => $post->getID(),
             'name' => $post->getName(),
             'slug' => $post->getSlug(),
             'content' => $post->getContent(),
-            'created' => $post->getCreatedAt()->format('Y-m-d H:i:s')
-        ]);
-        if($result === false) {
-            throw new Exception("Impossible d'éditer l'enregistrement $id dans la table {$this->table}");
-        }
-    }
-
-    public function delete(int $id) : void
-    {
-        $query = $this->pdo->prepare("DELETE FROM {$this->table} WHERE id = ?");
-        $result = $query->execute([$id]);
-        if($result === false) {
-            throw new Exception("Impossible de supprimer l'enregistrement $id dans la table {$this->table}");
-        }
+            'created_at' => $post->getCreatedAt()->format('Y-m-d H:i:s')
+        ], $post->getId());
     }
 
     public function findPaginated() 

@@ -22,11 +22,11 @@ class CategoryTable extends Table {
         $elements = implode(',', array_keys($postsByID));
         $categories = $this->pdo->query("SELECT c.*, pc.post_id
             FROM post_category pc
-            JOIN category c ON c.id =pc.category_id
+            JOIN category c ON c.id = pc.category_id
             WHERE pc.post_id IN ($elements)")
             ->fetchAll(PDO::FETCH_CLASS, $this->class);
         foreach($categories as $category) {
-            $postsByID[$category->getpostID()]->addCategory($category);
+            $postsByID[$category->getPostID()]->addCategory($category);
         }
     }
 }
