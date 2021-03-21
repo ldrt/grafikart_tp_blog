@@ -39,7 +39,27 @@ class Form {
         HTML;
     }
 
-    private function getValue(string $key) : ?string
+    public function select(string $key, string $label, array $options = []) : string
+    {
+        $optionsHTML = [];
+        $value = $this->getValue($key);
+        foreach($options as $k => $v) {
+            $selected = in_array($k, $value) ? " selected" : "";
+            $optionsHTML[] = "<option value=\"$k\" $selected>$v</option>";
+        }
+        $optionsHTML = implode('', $optionsHTML);
+        $inputClass = $this->getInputClass($key);
+        $invalidFeedback = $this->getErrorFeedback($key);
+        return <<<HTML
+            <div class="form-group">
+                <label for="field{$key}">{$label}</label>
+                <select id="field{$key}" class="{$inputClass}" name="{$key}[]" multiple>{ $optionsHTML }</select>
+            </div>
+            {$invalidFeedback}
+        HTML;
+    }
+
+    private function getValue(string $key)
     {
         if(is_array($this->data)) {
             return $this->data[$key] ?? null;

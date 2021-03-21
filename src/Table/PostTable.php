@@ -33,6 +33,15 @@ class PostTable extends Table {
         ], $post->getId());
     }
 
+    public function attachCategories (int $id, array $categories)
+    {
+        $this->pdo->exec('DELETE FROM post_category WHERE post_id = ' . $id);
+        $query = $this->pdo->prepare('INSERT INTO post_category SET post_id = ?, category_id = ?');
+        foreach($categories as $category) {
+            $query->execute([$id, $category]);
+        }
+    }
+
     public function findPaginated() 
     {
         $paginatedQuery = new PaginatedQuery(
