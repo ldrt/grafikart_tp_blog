@@ -1,10 +1,8 @@
 <?php
 namespace App\Table;
 
-use PDO;
 use App\Model\Post;
 use App\PaginatedQuery;
-use Exception;
 
 class PostTable extends Table {
     protected $table = "post";

@@ -14,12 +14,13 @@ class Form {
     public function input(string $key, string $label) : string
     {
         $value = $this->getValue($key);
+        $type = $key === "password" ? "password" : "text";
         $inputClass = $this->getInputClass($key);
         $invalidFeedback = $this->getErrorFeedback($key);
         return <<<HTML
             <div class="form-group">
                 <label for="field{$key}">{$label}</label>
-                <input id="field{$key}" type="text" class="{$inputClass}" name="{$key}" value="{$value}">
+                <input id="field{$key}" type="{$type}" class="{$inputClass}" name="{$key}" value="{$value}">
             </div>
             {$invalidFeedback}
         HTML;
